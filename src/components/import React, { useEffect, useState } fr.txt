@@ -1,0 +1,178 @@
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Login from "./Login";
+
+import imgLogo from "../assets/images/logo.png";
+
+
+const Header = () => {
+  const [mobileMenu, setMobileMenu] = useState(false);
+const [user, setUser] = useState(
+  JSON.parse(localStorage.getItem("user"))
+);
+
+
+  return (
+    <>
+      <header className="main-header header-style-one">
+        <div className="main-box">
+          <div className="logo-box">
+            <div className="logo">
+              <a href="index.html">
+                <img src={imgLogo} alt="" title="Consultez" />
+              </a>
+            </div>
+          </div>
+
+          <div className="nav-outer d-none d-lg-block">
+            <nav className="nav main-menu">
+              <ul className="navigation">
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/about">About</Link>
+                </li>
+                <li>
+                  <Link to="/profile">My Profile</Link>
+                </li>
+
+                <li>
+                  <Link to="/my-blogs">My Blogs</Link>
+                </li>
+
+                <li className="dropdown">
+                  <a href="#">Services</a>
+                  <ul>
+                    <li>
+                      <a href="page-services.html">Services</a>
+                    </li>
+                    <li>
+                      <a href="page-service-details.html">Services Details</a>
+                    </li>
+                  </ul>
+                </li>
+
+                <li>
+                  <Link to="/blogs">Blogs</Link>
+                </li>
+                <li>
+                  <a href="page-contact.html">Contact</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <div className="outer-box">
+            <div className="info-box">
+              <div className="call-info">
+                <i className="fa-solid fa-phone ring__animation"></i>
+
+                <div>
+                  <h6 className="title">Phone:</h6>
+                  <a href="tel:00222222200">+00 2222 222 00</a>
+                </div>
+              </div>
+
+        {user ? (
+  <>
+    <span className="btn-two me-2">
+      Hi, {user.name}
+    </span>
+
+    <button
+      className="btn-two"
+      onClick={() => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+
+        window.location.reload();
+      }}
+    >
+      Logout
+    </button>
+  </>
+) : (
+  <Link className="btn-two" to="/login">
+    Sign In
+  </Link>
+)}
+            </div>
+
+            {/* MOBILE TOGGLER */}
+            <div
+              className="mobile-nav-toggler d-block d-lg-none"
+              onClick={() => setMobileMenu(true)}
+            >
+              <i className="icon lnr-icon-bars"></i>
+            </div>
+          </div>
+        </div>
+
+        {/* MOBILE MENU */}
+        {/* MOBILE MENU */}
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: mobileMenu ? "0" : "-100%",
+            width: "300px",
+            height: "100vh",
+            background: "#fff",
+            zIndex: 99999,
+            transition: "0.4s",
+            padding: "20px",
+            overflowY: "auto",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: "30px",
+            }}
+          >
+            <img src={imgLogo} alt="" width="120" />
+
+            <button
+              onClick={() => setMobileMenu(false)}
+              style={{
+                border: "none",
+                background: "none",
+                fontSize: "24px",
+                cursor: "pointer",
+              }}
+            >
+              ×
+            </button>
+          </div>
+
+          <ul style={{ listStyle: "none", padding: 0 }}>
+            <li style={{ marginBottom: "20px" }}>
+              <a href="/">Home</a>
+            </li>
+
+            <li style={{ marginBottom: "20px" }}>
+              <a href="/">About</a>
+            </li>
+
+            <li style={{ marginBottom: "20px" }}>
+              <a href="/">Services</a>
+            </li>
+
+            <li style={{ marginBottom: "20px" }}>
+              <a href="/">Blogs</a>
+            </li>
+
+            <li style={{ marginBottom: "20px" }}>
+              <a href="/">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </header>
+    </>
+  );
+};
+
+export default Header;
