@@ -1,3 +1,3 @@
 ## Project Screenshot
 
-![Home Page](./src/images/home-page.png)
+![Home Page](./src/assets/images/home-page.png)
