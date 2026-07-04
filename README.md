@@ -5,4 +5,4 @@
 
 ## Blogs page
 
-![Blog Page](./src/assets/images/blog-page.png)
+![Blog Page](./src/assets/images/blogs-page.png)
